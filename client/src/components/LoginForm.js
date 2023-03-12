@@ -2,16 +2,18 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-// TODO: import login user mutation instead of api
-import { loginUser } from '../utils/API';
+// Import login user mutation instead of api
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../utils/mutations';
+
 import Auth from '../utils/auth';
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-
-  // TODO: define a useMutation variable that calls Login_User mutation
+  // Define a useMutation variable that calls Login_User mutation
+  const [login, { error, data }] = useMutation(LOGIN_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -29,21 +31,15 @@ const LoginForm = () => {
     }
 
     try {
-       // TODO: refactor code to call login and pass required arguments
-       //anywhere you see "response" = RESTful
-      //  needs to be changed
+       // Refactor code to call login and pass required arguments
+       //"response" = RESTful - needs to be changed
+      const { data } = await login({
+        variables: { ...userFormData },
+      });
 
-      const response = await loginUser(userFormData);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
-    } catch (err) {
-      console.error(err);
+      Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
       setShowAlert(true);
     }
 
