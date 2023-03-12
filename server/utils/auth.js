@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const secret = 'mysecretsshhhhh';
 const expiration = '2h';
 
+// TODO: refactor code to fit graphql, ref activity 26
 module.exports = {
   // function for our authenticated routes
   authMiddleware: function (req, res, next) {
