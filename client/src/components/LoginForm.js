@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-// TODO: import login user mutation
+// TODO: import login user mutation instead of api
 import { loginUser } from '../utils/API';
 import Auth from '../utils/auth';
 
@@ -30,7 +30,9 @@ const LoginForm = () => {
 
     try {
        // TODO: refactor code to call login and pass required arguments
-       
+       //anywhere you see "response" = RESTful
+      //  needs to be changed
+
       const response = await loginUser(userFormData);
 
       if (!response.ok) {

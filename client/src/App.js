@@ -3,8 +3,15 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
+// TODO: import apollo
+
+// TODO: create graphql endpoint
+// create request middleware for auth
+// get auth token from local storage
 
 function App() {
+  // TODO: refactor to include apollo
+  // wrap router with apollo tag
   return (
     <Router>
       <>
