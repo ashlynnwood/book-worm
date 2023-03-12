@@ -18,13 +18,13 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
+    addUser: async (_, { username, email, password }) => {
       // create new user, sign token, return token and user data
       const user = await User.create({ username, email, password });
       const token = signToken(user);
       return { token, user };
     },
-    login: async (parent, { email, password }) => {
+    login: async (_, { email, password }) => {
       // find user, check password, sign token, return token and user data
         const user = await User.findOne({ email });
   
@@ -42,10 +42,21 @@ const resolvers = {
   
         return { token, user };
     },
-    saveBook: async (parent, args, context) => {
+    saveBook: async (_, { bookData }, { user }) => {
       // protect route, find current user, update their savedBooks array, return user data
+      
+      if (user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: user._id },
+          { $addToSet: { savedBooks: bookData } },
+          { new: true, runValidators: true }
+        );
+
+        return updatedUser.savedBooks;
+      }
+      throw new AuthenticationError('You need to be logged in to save a book!');
     },
-    removeBook: async (parent, args, context) => {
+    removeBook: async (_, args, { user }) => {
       // protect route, find current user, update their savedBooks array, return user data
     },
   },
