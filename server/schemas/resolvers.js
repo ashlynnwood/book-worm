@@ -52,8 +52,7 @@ const resolvers = {
           { new: true, runValidators: true }
         );
 
-        return updatedUser
-        // .savedBooks;
+        return updatedUser.savedBooks;
       }
       throw new AuthenticationError('You need to be logged in to save a book!');
     },
@@ -65,7 +64,7 @@ const resolvers = {
           { $pull: { savedBooks: bookId } }
         );
 
-        return updatedUser;
+        return updatedUser.savedBooks;
       }
 
       throw new AuthenticationError('You need to be logged in to remove a book!')
