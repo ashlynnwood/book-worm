@@ -8,7 +8,7 @@ const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    me: async (parent, args, context) => {
+    me: async (_, args, context) => {
       // find current user and return userData
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('books');
@@ -52,12 +52,24 @@ const resolvers = {
           { new: true, runValidators: true }
         );
 
-        return updatedUser.savedBooks;
+        return updatedUser
+        // .savedBooks;
       }
       throw new AuthenticationError('You need to be logged in to save a book!');
     },
-    removeBook: async (_, args, { user }) => {
+    removeBook: async (_, { bookId }, { user }) => {
       // protect route, find current user, update their savedBooks array, return user data
+      if (user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: user.id },
+          { $pull: { savedBooks: bookId } }
+        );
+
+        return updatedUser;
+      }
+
+      throw new AuthenticationError('You need to be logged in to remove a book!')
+
     },
   },
 };
