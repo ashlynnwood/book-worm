@@ -10,12 +10,19 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       // find current user and return userData
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).populate('books');
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
   },
 
   Mutation: {
-    addUser: async (parent, args) => {
+    addUser: async (parent, { username, email, password }) => {
       // create new user, sign token, return token and user data
+      const user = await User.create({ username, email, password });
+      const token = signToken(user);
+      return { token, user };
     },
     login: async (parent, { email, password }) => {
       // find user, check password, sign token, return token and user data
