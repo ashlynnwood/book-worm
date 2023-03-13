@@ -20,7 +20,7 @@ Google Books API using ApolloServer, graphql queries, and MERN stack.
   ## Table of Contents
   * [Installation](#installation)
   * [Usage](#usage)
-  * [Technologies] (#technologies)
+  * [Technologies](#technologies)
   * [License](#license)
   * [Contributing](#contributing)
   * [Questions](#questions)
