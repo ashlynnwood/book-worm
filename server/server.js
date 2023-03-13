@@ -1,17 +1,14 @@
-// TODO: refactor code for graphql, reference activity 26
-
 const express = require('express');
 const path = require('path');
 const db = require('./config/connection');
-// const routes = require('./routes');
 
-// TODO: require typedefs, resolvers, apolloserver
+// Require typedefs, resolvers, apolloserver
 const { typeDefs, resolvers } = require('./schemas');
 const { ApolloServer } = require('apollo-server-express');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-// TODO: call your server
+// Call server
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -29,8 +26,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
-// TODO: refactor routes to instead call startApolloServer
-// app.use(routes);
+// Refactor routes to call startApolloServer
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
   server.applyMiddleware({ app });
