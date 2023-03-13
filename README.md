@@ -3,6 +3,9 @@ Google Books API using ApolloServer, graphql queries, and MERN stack.
 
 ![GitHub-license](https://img.shields.io/badge/License-MIT-blue)
 
+  ## Description
+  This is a full stack application that allows users to search for books using the Google Books API and save them to their reading wish list. The app is built with the MERN (MongoDB, Express.js, React, and Node.js) stack and uses Apollo Server to implement GraphQL queries.
+
   ## Preview
   A user can search for books...
   ![preview1](./Assets/preview1.gif)
@@ -13,9 +16,6 @@ Google Books API using ApolloServer, graphql queries, and MERN stack.
   Users can then click on the "See Your Books" tab and view all of their saved books.
   ![preview2](./Assets/preview2.gif)
   
-
-  ## Description
-  This is a full stack application that allows users to search for books using the Google Books API and save them to their reading wish list. The app is built with the MERN (MongoDB, Express.js, React, and Node.js) stack and uses Apollo Server to implement GraphQL queries.
 
   ## Table of Contents
   * [Installation](#installation)
