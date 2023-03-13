@@ -5,13 +5,13 @@ Google Books API using ApolloServer, graphql queries, and MERN stack.
 
   ## Preview
   A user can search for books...
-  [preview1](./Assets/preview1.gif)
+  ![preview1](./Assets/preview1.gif)
 
   If logged in, users can save books to their account as demponstrated below.
-  [preview3](./Assets/preview3.gif)
+  ![preview3](./Assets/preview3.gif)
 
   Users can then click on the "See Your Books" tab and view all of their saved books.
-  [preview2](./Assets/preview2.gif)
+  ![preview2](./Assets/preview2.gif)
   
 
   ## Description
