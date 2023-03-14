@@ -2,7 +2,7 @@
 export const getMe = (token) => {
   return fetch('/api/users/me', {
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/graphql',
       authorization: `Bearer ${token}`,
     },
   });
@@ -12,7 +12,7 @@ export const createUser = (userData) => {
   return fetch('/api/users', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/graphql',
     },
     body: JSON.stringify(userData),
   });
@@ -22,7 +22,7 @@ export const loginUser = (userData) => {
   return fetch('/api/users/login', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/graphql',
     },
     body: JSON.stringify(userData),
   });
@@ -33,7 +33,7 @@ export const saveBook = (bookData, token) => {
   return fetch('/api/users', {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/graphql',
       authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(bookData),

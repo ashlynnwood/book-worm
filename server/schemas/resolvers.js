@@ -42,17 +42,17 @@ const resolvers = {
   
         return { token, user };
     },
-    saveBook: async (_, { bookData }, { user }) => {
+    saveBook: async (parent, { bookData }, context) => {
       // protect route, find current user, update their savedBooks array, return user data
       
-      if (user) {
+      if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: user._id },
+          { _id: context.user._id },
           { $addToSet: { savedBooks: bookData } },
           { new: true, runValidators: true }
         );
 
-        return updatedUser.savedBooks;
+        return updatedUser;
       }
       throw new AuthenticationError('You need to be logged in to save a book!');
     },
@@ -60,11 +60,11 @@ const resolvers = {
       // protect route, find current user, update their savedBooks array, return user data
       if (user) {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: user.id },
-          { $pull: { savedBooks: bookId } }
+          { _id: user._id },
+          { $pull: { savedBooks: { bookId } } }
         );
 
-        return updatedUser.savedBooks;
+        return updatedUser;
       }
 
       throw new AuthenticationError('You need to be logged in to remove a book!')
